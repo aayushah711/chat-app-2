@@ -7,7 +7,7 @@ class UserController {
   createUser = async (req, res) => {
     try {
       const user = await this.userService.createUser(req.body);
-      const { password, ...userWithoutPassword } = user;
+      const { password, ...userWithoutPassword } = user.dataValues;
       return res.status(201).json(userWithoutPassword);
     } catch (error) {
       this.handleError(res, error);

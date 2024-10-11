@@ -6,9 +6,23 @@ require("dotenv").config();
 const authRoutes = require("./src/routes/auth.routes");
 const initializeModels = require("./src/models");
 const sequelize = require("./src/utils/db");
+const { Server } = require("socket.io");
 
 const createServer = async () => {
   const app = express();
+  const server = http.createServer(app);
+  const io = new Server(server, {
+    cors: {
+      origin: "http://127.0.0.1:5500", // or specify the allowed origins
+      methods: ["GET", "POST"],
+      allowedHeaders: ["chat-app"],
+      credentials: true,
+    },
+  });
+  io.on("connection", (socket) => {
+    console.log("a user connected");
+  });
+
   app.use(bodyParser.json());
   app.use(express.json());
   const models = await initializeModels();
@@ -19,9 +33,13 @@ const createServer = async () => {
     req.container = container;
     next();
   });
-  app.use("/auth", authRoutes);
 
-  const server = http.createServer(app);
+  app.use((req, res, next) => {
+    req.io = io;
+    next();
+  });
+
+  app.use("/auth", authRoutes);
 
   server.on("close", () => container.dispose());
   return server;
