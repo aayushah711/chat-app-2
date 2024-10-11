@@ -47,3 +47,12 @@ Welcome to the Chat App! This application allows users to communicate in real-ti
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request.
+
+<!--
+Entities
+Users - id, email, password
+Messages - id, conversationId, senderId, content
+Conversations - id, groupTitle
+ConversationsUsers - conversationId, userId
+Users & Conversations have many to many mapping
+ -->

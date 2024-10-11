@@ -1,0 +1,27 @@
+### User Registration
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "name": "user1",
+    "email": "user1@example.com",
+    "password": "password"
+}
+
+### User Login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "user1@example.com",
+    "password": "password"
+}
+
+### User Logout
+POST http://localhost:3000/auth/logout
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjliM2I4YTk4LTVhOTctNDY0Zi1hM2FmLTY2OTI1YWE4NmM4NiIsImVtYWlsIjoidXNlcjFAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mjg2Mjk4NzcsImV4cCI6MTcyODYzMzQ3N30.2j0qFMj9PJQnmhae3PfSnmH1CSvgu4kMvQJctq8Rfzg
+
+{
+    "email": "user1@example.com"
+}
