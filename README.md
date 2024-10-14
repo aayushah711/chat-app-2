@@ -51,8 +51,27 @@ Contributions are welcome! Please fork the repository and submit a pull request.
 <!--
 Entities
 Users - id, email, password
-Messages - id, conversationId, senderId, content
-Conversations - id, groupTitle
-ConversationsUsers - conversationId, userId
-Users & Conversations have many to many mapping
+Messages - id, chatId, senderId, content
+Chats - id, groupTitle
+ChatsUsers - chatId, userId
+Users & Chats have many to many mapping
  -->
+
+## Steps
+
+user1 logs in
+get all chats => db fetch
+
+user1 clicks on a chat
+join chat room
+get last 20 rows
+
+When user1 sends a message to user2
+On frontend emit("chatMessage", message)
+On backend on("chatMessage",cb)
+
+Inside cb:
+Store message in db: {messageId, chatId, senderId, content, createdAt}
+send event (eventName: "chat-message-for-user2", message: {id, senderId, content, createdAt})
+
+user2 who is logged in, is listening to (eventName: "chat-message-for-user2")

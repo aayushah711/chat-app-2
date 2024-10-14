@@ -7,6 +7,7 @@ const authRoutes = require("./src/routes/auth.routes");
 const initializeModels = require("./src/models");
 const sequelize = require("./src/utils/db");
 const { Server } = require("socket.io");
+const onConnection = require("./src/utils/socketManager");
 
 const createServer = async () => {
   const app = express();
@@ -19,15 +20,14 @@ const createServer = async () => {
       credentials: true,
     },
   });
-  io.on("connection", (socket) => {
-    console.log("a user connected");
-  });
 
   app.use(bodyParser.json());
   app.use(express.json());
   const models = await initializeModels();
 
   const container = configureContainer(models, sequelize);
+
+  io.on("connection", (socket) => onConnection(socket, io, container));
 
   app.use((req, res, next) => {
     req.container = container;

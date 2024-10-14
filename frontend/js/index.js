@@ -4,30 +4,38 @@ const roomName = document.getElementById("room-name");
 const userList = document.getElementById("users");
 const leave = document.getElementById("leave-btn");
 
-const { username, room } = Qs.parse(location.search, {
+const { userId } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
 
-console.log(username);
-console.log(room);
+const to = userId === "user-1" ? "user-2" : "user-1";
+console.log(11, userId);
+
+const chatId = "chat-1";
 
 const socket = io("http://localhost:3000/");
 
-socket.emit("joinRoom", { username, room });
+socket.emit("joinRoom", { userId, chatId });
 
 socket.on("message", (message) => {
+  console.log(18, message);
   outputMessage(message);
 });
 
-socket.on("onlineUsers", ({ room, users }) => {
-  outputUsers(users);
-  outputRoomName(room);
-});
+// socket.on("onlineUsers", ({ room, users }) => {
+//   outputUsers(users);
+//   outputRoomName(room);
+// });
 
 chatForm?.addEventListener("submit", (e) => {
   e.preventDefault();
   let message = e?.target?.elements.msg.value;
-  socket.emit("chatMessage", message);
+  console.log(30, message);
+  socket.emit("chatMessage", {
+    chatId: "1",
+    senderId: userId,
+    content: message,
+  });
 });
 
 leave?.addEventListener("click", () => {
