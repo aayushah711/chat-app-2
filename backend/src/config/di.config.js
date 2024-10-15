@@ -1,13 +1,4 @@
-const {
-  asClass,
-  createContainer,
-  asValue,
-  Lifetime,
-  asFunction,
-} = require("awilix");
-const UserRepository = require("../repositories/user.repository");
-const UserService = require("../services/user.service");
-const UserController = require("../controllers/user.controller");
+const { createContainer, asValue, Lifetime, asFunction } = require("awilix");
 const { handleError } = require("../utils");
 
 const configureContainer = (models, sequelize) => {
@@ -16,11 +7,18 @@ const configureContainer = (models, sequelize) => {
   container.register({
     sequelize: asValue(sequelize),
     models: asValue(models),
-    userService: asClass(UserService, { lifetime: Lifetime.SINGLETON }),
-    userRepository: asClass(UserRepository, { lifetime: Lifetime.SINGLETON }),
-    userController: asClass(UserController, { lifetime: Lifetime.SINGLETON }),
     handleError: asFunction(() => handleError),
   });
+
+  container.loadModules(
+    ["src/services/*.js", "src/repositories/*.js", "src/controllers/*.js"],
+    {
+      resolverOptions: {
+        lifetime: Lifetime.SINGLETON,
+      },
+      formatName: "camelCase",
+    }
+  );
 
   return container;
 };
