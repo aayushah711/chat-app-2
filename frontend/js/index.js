@@ -22,7 +22,7 @@ chatForm?.addEventListener("submit", (e) => {
   e.preventDefault();
   let message = e?.target?.elements.msg.value;
   socket.emit("chatMessage", {
-    chatId: 1,
+    chatId,
     senderId: userId,
     content: message,
   });

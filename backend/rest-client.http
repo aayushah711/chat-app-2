@@ -13,7 +13,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "email": "user1@example.com",
+    "email": "user2@example.com",
     "password": "password"
 }
 
@@ -29,8 +29,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjliM2I4YTk4L
 ### Create a new chat
 POST http://localhost:3000/chat
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjliM2I4YTk4LTVhOTctNDY0Zi1hM2FmLTY2OTI1YWE4NmM4NiIsImVtYWlsIjoidXNlcjFAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mjg5NzQ2NDcsImV4cCI6MTcyODk3ODI0N30.nJ4lmbqGC-EdqrLaLoUVGiKGE-ChShz1YM1oPYIlER4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ3ZjVhNjZkLWFkNDUtNGVkNS1hOTNlLTMyMzgwOWY3NjBjMyIsImVtYWlsIjoidXNlcjJAZXhhbXBsZS5jb20iLCJpYXQiOjE3MjkwMDQzMzIsImV4cCI6MTcyOTAwNzkzMn0.HqBzg3EYrcZgjyZkQXGyw0JZEWl6yyEXkNM4ZvrRRw4
 
 {
-    "users": ["9b3b8a98-5a97-464f-a3af-66925aa86c86", "617acc79-7c10-4329-9968-8450081959b8"]
+    "users": ["d7f5a66d-ad45-4ed5-a93e-323809f760c3", "8e02905e-b1db-45fd-81f4-e1b37fe0c320"]
 }
