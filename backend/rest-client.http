@@ -20,8 +20,17 @@ Content-Type: application/json
 ### User Logout
 POST http://localhost:3000/auth/logout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjliM2I4YTk4LTVhOTctNDY0Zi1hM2FmLTY2OTI1YWE4NmM4NiIsImVtYWlsIjoidXNlcjFAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mjg2Mjk4NzcsImV4cCI6MTcyODYzMzQ3N30.2j0qFMj9PJQnmhae3PfSnmH1CSvgu4kMvQJctq8Rfzg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjliM2I4YTk4LTVhOTctNDY0Zi1hM2FmLTY2OTI1YWE4NmM4NiIsImVtYWlsIjoidXNlcjFAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mjg5NzQ2NDcsImV4cCI6MTcyODk3ODI0N30.nJ4lmbqGC-EdqrLaLoUVGiKGE-ChShz1YM1oPYIlER4
 
 {
     "email": "user1@example.com"
+}
+
+### Create a new chat
+POST http://localhost:3000/chat
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjliM2I4YTk4LTVhOTctNDY0Zi1hM2FmLTY2OTI1YWE4NmM4NiIsImVtYWlsIjoidXNlcjFAZXhhbXBsZS5jb20iLCJpYXQiOjE3Mjg5NzQ2NDcsImV4cCI6MTcyODk3ODI0N30.nJ4lmbqGC-EdqrLaLoUVGiKGE-ChShz1YM1oPYIlER4
+
+{
+    "users": ["9b3b8a98-5a97-464f-a3af-66925aa86c86", "617acc79-7c10-4329-9968-8450081959b8"]
 }

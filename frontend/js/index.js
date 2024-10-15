@@ -8,31 +8,21 @@ const { userId } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
 
-const to = userId === "user-1" ? "user-2" : "user-1";
-console.log(11, userId);
-
-const chatId = "chat-1";
+const chatId = userId === "d7f5a66d-ad45-4ed5-a93e-323809f760c3" ? 2 : 1;
 
 const socket = io("http://localhost:3000/");
 
 socket.emit("joinRoom", { userId, chatId });
 
-socket.on("message", (message) => {
-  console.log(18, message);
+socket.on("newMessage", (message) => {
   outputMessage(message);
 });
-
-// socket.on("onlineUsers", ({ room, users }) => {
-//   outputUsers(users);
-//   outputRoomName(room);
-// });
 
 chatForm?.addEventListener("submit", (e) => {
   e.preventDefault();
   let message = e?.target?.elements.msg.value;
-  console.log(30, message);
   socket.emit("chatMessage", {
-    chatId: "1",
+    chatId: 1,
     senderId: userId,
     content: message,
   });
@@ -48,27 +38,14 @@ function outputMessage(message) {
 
   const p = document.createElement("p");
   p.classList.add("meta");
-  p.innerText = message.username;
-  p.innerHTML += `<span>${message.time}</span>`;
+  p.innerText = message.senderId;
+  p.innerHTML += `<span>${message.updatedAt}</span>`;
   div.appendChild(p);
 
   const para = document.createElement("p");
   para.classList.add("text");
-  para.innerText = message.text;
+  para.innerText = message.content;
   div.appendChild(para);
 
   document.querySelector(".chat-messages")?.appendChild(div);
-}
-
-function outputRoomName(room) {
-  roomName.innerText = room;
-}
-
-function outputUsers(users) {
-  userList.innerHTML = "";
-  users.forEach((user) => {
-    const li = document.createElement("li");
-    li.innerText = user.username;
-    userList.appendChild(li);
-  });
 }

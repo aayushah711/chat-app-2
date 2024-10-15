@@ -21,7 +21,14 @@ class UserRepository {
     }
   }
 
-  async getUserById(id) {}
+  async getUserById(id) {
+    try {
+      const user = await this.User.findOne({ where: { id } });
+      return user;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 
   async updateUser(id, user) {}
 

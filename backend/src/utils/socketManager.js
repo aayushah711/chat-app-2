@@ -3,19 +3,20 @@ const onConnection = (socket, io, container) => {
 
   socket.on("joinRoom", async ({ userId, chatId }) => {
     try {
-      const user = await container.cradle.userService.findUserById(userId);
+      const user = await container.cradle.userService.getUserById(userId);
       if (!user) {
         throw new Error("User not found");
       }
 
-      const chat =
-        await container.cradle.conversationService.findConversationById(chatId);
+      const chat = await container.cradle.chatService.getChatById(chatId);
       if (!chat) {
         throw new Error("chat not found");
       }
 
       socket.join(chatId);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   });
 
   socket.on("chatMessage", async (data) => {

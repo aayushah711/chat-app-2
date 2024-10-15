@@ -4,11 +4,9 @@ class MessageService {
   }
 
   async createMessage(chatId, senderId, content) {
-    const message = await this.messageRepository.createMessage(
-      chatId,
-      senderId,
-      content
-    );
+    const message = await this.messageRepository.createMessage({ content });
+    await message.setChat(chatId);
+    await message.setUser(senderId);
     return message;
   }
 }
