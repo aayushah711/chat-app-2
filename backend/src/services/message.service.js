@@ -1,6 +1,3 @@
-const CustomError = require("../utils/CustomError");
-require("dotenv").config();
-
 class MessageService {
   constructor({ messageRepository }) {
     this.messageRepository = messageRepository;
