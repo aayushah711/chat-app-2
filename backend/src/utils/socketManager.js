@@ -30,8 +30,14 @@ const onConnection = (socket, io, container) => {
         content
       );
 
+      const { content: encryptedContent, messageWithoutEncryptedContent } =
+        message.dataValues;
+
       // Emit the message to all clients in the chat room
-      io.to(chatId).emit("newMessage", message);
+      io.to(chatId).emit("newMessage", {
+        ...messageWithoutEncryptedContent,
+        content,
+      });
     } catch (error) {
       console.error("Error processing message:", error);
     }
