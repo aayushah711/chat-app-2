@@ -52,7 +52,13 @@ Contributions are welcome! Please fork the repository and submit a pull request.
 Entities
 Users - id, email, password
 Messages - id, chatId, senderId, content
+1 user can have many messages
+1 message can have 1 user
+
 Chats - id, groupTitle
+1 Message can be part of 1 chat
+1 Chat can have many Messages
+
 ChatsUsers - chatId, userId
 Users & Chats have many to many mapping
  -->

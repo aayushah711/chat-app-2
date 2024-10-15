@@ -20,12 +20,27 @@ const initializeModels = async () => {
     });
 
   //   // Define associations here
-  //   const { User, Profile } = db;
+  const { User, Message, Chat } = db;
 
-  //   if (User && Profile) {
-  //     User.hasOne(Profile, { foreignKey: "userId" });
-  //     Profile.belongsTo(User, { foreignKey: "userId" });
-  //   }
+  if (User && Message && Chat) {
+    // User.hasOne(Message, { foreignKey: "userId" });
+    // Message.belongsTo(User, { foreignKey: "userId" });
+
+    User.hasMany(Message, { foreignKey: "senderId" });
+    Message.belongsTo(User, { foreignKey: "senderId" });
+
+    Chat.hasMany(Message, { foreignKey: "chatId" });
+    Message.belongsTo(Chat, { foreignKey: "chatId" });
+
+    User.belongsToMany(Chat, {
+      through: "UserChats",
+      foreignKey: "userId",
+    });
+    Chat.belongsToMany(User, {
+      through: "UserChats",
+      foreignKey: "chatId",
+    });
+  }
 
   try {
     await sequelize.sync({ alter: true });
