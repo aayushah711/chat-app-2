@@ -14,6 +14,10 @@ const Message = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      imageUrl: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
     },
     { sequelize, modelName: "Message", tableName: "Messages" }
   );
