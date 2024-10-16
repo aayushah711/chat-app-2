@@ -1,4 +1,4 @@
-const { encryptMessage } = require("../utils/encryption");
+const { encryptMessage, decryptMessage } = require("../utils/encryption");
 
 class MessageService {
   constructor({ messageRepository }) {
@@ -16,7 +16,13 @@ class MessageService {
   }
 
   async getMessagesByChatId(chatId) {
-    return this.messageRepository.getMessagesByChatId(Number(chatId));
+    const messages = await this.messageRepository.getMessagesByChatId(
+      Number(chatId)
+    );
+    messages.forEach((message) => {
+      message.content = decryptMessage(message.content);
+    });
+    return messages;
   }
 }
 
