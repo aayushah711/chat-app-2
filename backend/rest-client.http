@@ -13,7 +13,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "email": "user2@example.com",
+    "email": "user1@example.com",
     "password": "password"
 }
 
@@ -34,3 +34,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ3ZjVhNjZkL
 {
     "users": ["d7f5a66d-ad45-4ed5-a93e-323809f760c3", "8e02905e-b1db-45fd-81f4-e1b37fe0c320"]
 }
+
+### Get all messages by ChatId
+GET http://localhost:3000/message?chatId=1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjliM2I4YTk4LTVhOTctNDY0Zi1hM2FmLTY2OTI1YWE4NmM4NiIsImVtYWlsIjoidXNlcjFAZXhhbXBsZS5jb20iLCJpYXQiOjE3MjkwNTQ2NTUsImV4cCI6MTcyOTA1ODI1NX0.NbZwfY7DAqe-d2-XzOjRvq5EH761b5Dy_vxRSgvfXZk

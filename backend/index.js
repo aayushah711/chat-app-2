@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 const authRoutes = require("./src/routes/auth.routes");
 const chatRoutes = require("./src/routes/chat.routes");
+const messageRoutes = require("./src/routes/message.routes");
 const initializeModels = require("./src/models");
 const sequelize = require("./src/utils/db");
 const { Server } = require("socket.io");
@@ -42,6 +43,7 @@ const createServer = async () => {
 
   app.use("/auth", authRoutes);
   app.use("/chat", chatRoutes);
+  app.use("/message", messageRoutes);
 
   server.on("close", () => container.dispose());
   return server;

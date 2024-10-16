@@ -1,5 +1,5 @@
 const express = require("express");
-const { validateBadRequest } = require("../middlewares/user.middleware");
+const { validateRequestBody } = require("../middlewares/user.middleware");
 const authenticateToken = require("../middlewares/auth.middleware.js");
 const {
   registerValidator,
@@ -9,13 +9,13 @@ const router = express.Router();
 
 router.post(
   "/register",
-  validateBadRequest(registerValidator),
+  validateRequestBody(registerValidator),
   (req, res, next) => {
     return req.container.resolve("userController").createUser(req, res, next);
   }
 );
 
-router.post("/login", validateBadRequest(loginValidator), (req, res, next) => {
+router.post("/login", validateRequestBody(loginValidator), (req, res, next) => {
   return req.container.resolve("userController").loginUser(req, res, next);
 });
 

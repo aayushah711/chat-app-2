@@ -11,6 +11,17 @@ class MessageRepository {
       throw new Error(error);
     }
   }
+
+  async getMessagesByChatId(chatId) {
+    try {
+      const messages = await this.Message.findAll({
+        where: { chatId },
+      });
+      return messages;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
 
 module.exports = MessageRepository;

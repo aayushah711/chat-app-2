@@ -1,4 +1,4 @@
-const validateBadRequest = (schema) => (req, res, next) => {
+const validateRequestBody = (schema) => (req, res, next) => {
   const { error } = schema.validate(req.body);
   if (error) {
     return res
@@ -8,4 +8,14 @@ const validateBadRequest = (schema) => (req, res, next) => {
   next();
 };
 
-module.exports = { validateBadRequest };
+const validateRequestQuery = (schema) => (req, res, next) => {
+  const { error } = schema.validate(req.query);
+  if (error) {
+    return res
+      .status(400)
+      .json({ error: error.details.map((err) => err.message).join(", ") });
+  }
+  next();
+};
+
+module.exports = { validateRequestBody, validateRequestQuery };

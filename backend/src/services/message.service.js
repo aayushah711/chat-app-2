@@ -14,6 +14,10 @@ class MessageService {
     await message.setUser(senderId);
     return message;
   }
+
+  async getMessagesByChatId(chatId) {
+    return this.messageRepository.getMessagesByChatId(Number(chatId));
+  }
 }
 
 module.exports = MessageService;
