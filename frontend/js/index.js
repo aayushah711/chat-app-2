@@ -49,3 +49,26 @@ function outputMessage(message) {
 
   document.querySelector(".chat-messages")?.appendChild(div);
 }
+
+// on load of page make an api call to fetch all messages
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Fetching messages...");
+
+  const token =
+    localStorage.getItem("token") ||
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjliM2I4YTk4LTVhOTctNDY0Zi1hM2FmLTY2OTI1YWE4NmM4NiIsImVtYWlsIjoidXNlcjFAZXhhbXBsZS5jb20iLCJpYXQiOjE3MjkwNTQ2NTUsImV4cCI6MTcyOTA1ODI1NX0.NbZwfY7DAqe-d2-XzOjRvq5EH761b5Dy_vxRSgvfXZk";
+  const headers = new Headers();
+  headers.append("Authorization", `Bearer ${token}`);
+
+  fetch(`http://localhost:3000/message?chatId=${chatId}`, {
+    method: "GET",
+    headers: headers,
+  })
+    .then((response) => response.json())
+    .then((messages) => {
+      messages.forEach((message) => {
+        outputMessage(message);
+      });
+    })
+    .catch((error) => console.error("Error fetching messages:", error));
+});

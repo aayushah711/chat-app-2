@@ -10,13 +10,15 @@ const initializeModels = require("./src/models");
 const sequelize = require("./src/utils/db");
 const { Server } = require("socket.io");
 const onConnection = require("./src/utils/socketManager");
+const cors = require("cors");
+const { origin } = require("./src/config/origin.config");
 
 const createServer = async () => {
   const app = express();
   const server = http.createServer(app);
   const io = new Server(server, {
     cors: {
-      origin: "http://127.0.0.1:5500", // specify the allowed origins
+      origin,
       methods: ["GET", "POST"],
       allowedHeaders: ["chat-app"],
       credentials: true,
@@ -24,6 +26,12 @@ const createServer = async () => {
   });
 
   app.use(bodyParser.json());
+  app.use(
+    cors({
+      origin,
+    })
+  );
+
   app.use(express.json());
   const models = await initializeModels();
 
